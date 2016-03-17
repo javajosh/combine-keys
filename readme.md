@@ -13,7 +13,7 @@ To be honest it's a very short function, and I recommend you read the source. Th
 ## How to use the function.
 
 	>npm install --save combine-keys
-	index.js ->var combineKeys = require('combineKeys')
+	var combineKeys = require('combineKeys')
 
 ## How to test, build, contribute.
 
@@ -23,18 +23,19 @@ To be honest it's a very short function, and I recommend you read the source. Th
 	cd combine-keys
 	npm install
 	npm run test
+  npm browser
 
-You'll then want to edit combineKeys.js, and/or add tests to tests.js, then run `npm run test` again. (Actually you should fork this repo, create a branch, edit the branch, cleanup the branch, and issue a pull request. But that's beyond the scope of this document!)
+If you don't get errors in the terminal (`npm run test`) or the browser console (`npm browser`), then it works. You'll then want to edit combineKeys.js, and/or add tests to tests.js, then run `npm run test` again. (Actually you should fork this repo, create a branch, edit the branch, cleanup the branch, run `npm run lint` and issue a pull request. But that's beyond the scope of this document!)
 
-Note that you'll also want to install EditorConfig into your browser.
+Note that you'll also want to install an EditorConfig plugin into your editor.
 
 ### TODO:
 
-1. Add code to allow direct inclusion into a browser (with script.src='combineKeys.js').
+1. <s>Add code to allow direct inclusion into a browser (with script.src='combineKeys.js').</s>
 2. Write more tests, especially around mutation
 3. <s>Spruce this project up with tips from https://github.com/filipedeschamps/rss-feed-emitter/issues/119</s>
 4. <s>Push to github.</s>
-5. push to npm
+5. <s>push to npm</s>
 6. <s>Add http://editorconfig.org/</s> Also see https://duckduckgo.com/?q=sublime+text+editorconfig see .editorconfig
 7. <s>Add http://eslint.org/</s> `npm run lint` see .eslintrc
 8. <s>Add babel</s> `npm run build` see .babelrc - support es2015 (es6). outputs to combineKeys.build.js
