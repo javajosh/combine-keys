@@ -4,11 +4,9 @@
   "description": "A function that combines the keys of two objects",
   "main": "test.js",
   "scripts": {
-    "test": "node dist/test.js",
-    "build": "babel src --out-dir dist --source-maps",
-    "clean": "rm -f dist/*",
-    "lint": "eslint .",
-    "all": "npm run clean && npm run build && npm run test"
+    "test": "node test.js",
+    "browser" : "open index.html",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

@@ -38,3 +38,4 @@ Note that you'll also want to install EditorConfig into your browser.
 6. <s>Add http://editorconfig.org/</s> Also see https://duckduckgo.com/?q=sublime+text+editorconfig see .editorconfig
 7. <s>Add http://eslint.org/</s> `npm run lint` see .eslintrc
 8. <s>Add babel</s> `npm run build` see .babelrc - support es2015 (es6). outputs to combineKeys.build.js
+

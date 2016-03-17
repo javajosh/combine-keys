@@ -1,10 +1,8 @@
-
-'use strict';
-
-function clone(obj){
-	return JSON.parse(JSON.stringify(obj));
-}
 function combineKeys(oLeft, oRight, bMutate){
+  'use strict';
+  function clone(obj){
+    return JSON.parse(JSON.stringify(obj));
+  }
 	if (typeof oRight != 'object' || oRight === null ) return oLeft;
 	if (typeof bMutate !== 'boolean') bMutate = false;
 	var result = bMutate ? oLeft : clone(oLeft);
@@ -32,4 +30,9 @@ function combineKeys(oLeft, oRight, bMutate){
 	return result;
 }
 
-export default combineKeys;
+//If we're in node, export the function,
+//If we're in a browser, put the function in global scope.
+if (typeof exports !== 'undefined' && this.exports !== exports)
+  module.exports = combineKeys;
+else if (typeof window !== 'undefined' && this.window !== window)
+  window.combineKeys = combineKeys;
