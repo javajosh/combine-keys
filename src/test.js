@@ -1,6 +1,8 @@
 var assert = 		require('assert');
 var combineKeys = 	require('./combineKeys.js');
 
+//console.log(`Version: ${process.version}`);
+
 //test the numeric stuff
 var b = combineKeys({a:1},{a:1});
 assert(b.a === 2);

@@ -32,8 +32,8 @@ Note that you'll also want to install EditorConfig into your browser.
 
 1. Add code to allow direct inclusion into a browser (with script.src='combineKeys.js').
 2. Write more tests, especially around mutation
-3. Spruce this project up with tips from https://github.com/filipedeschamps/rss-feed-emitter
-4. Push to github.
+3. <s>Spruce this project up with tips from https://github.com/filipedeschamps/rss-feed-emitter/issues/119</s>
+4. <s>Push to github.</s>
 5. push to npm
 6. <s>Add http://editorconfig.org/</s> Also see https://duckduckgo.com/?q=sublime+text+editorconfig see .editorconfig
 7. <s>Add http://eslint.org/</s> `npm run lint` see .eslintrc

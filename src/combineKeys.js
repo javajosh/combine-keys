@@ -1,3 +1,4 @@
+
 'use strict';
 
 function clone(obj){
@@ -31,4 +32,4 @@ function combineKeys(oLeft, oRight, bMutate){
 	return result;
 }
 
-module.exports = combineKeys;
+export default combineKeys;
