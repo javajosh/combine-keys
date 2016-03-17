@@ -1,0 +1,16 @@
+{
+  "name": "combine-keys",
+  "version": "0.1.0",
+  "description": "A function that combines the keys of two objects",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "javascript",
+    "utility",
+    "object"
+  ],
+  "author": "Josh Rehman",
+  "license": "MIT"
+}
