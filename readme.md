@@ -26,3 +26,10 @@ To be honest it's a very short function, and I recommend you read the source. Th
 
 You'll then want to edit combineKeys.js, and/or add tests to tests.js, then run `npm run test` again. (Actually you should fork this repo, create a branch, edit the branch, cleanup the branch, and issue a pull request. But that's beyond the scope of this document!)
 
+TODO:
+
+	1. Add code to allow direct inclusion into a browser (with script.src='combineKeys.js').
+	2. Write more tests, especially around mutation
+	3. Spruce this project up with tips from https://github.com/filipedeschamps/rss-feed-emitter
+	4. Push to github.
+	5. push to npm
