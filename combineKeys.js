@@ -10,24 +10,25 @@ function combineKeys(oLeft, oRight, bMutate){
 	var rightKeys = Object.keys(oRight);
 
 	for (var i = 0; i < leftKeys.length; i++) {
-		var leftKey = leftKeys[i];
-		var leftValue = result[leftKey], leftType = typeof leftValue;
-		var rightValue = oRight[leftKey], rightType = typeof rightValue;
+		var leftKey 	= leftKeys[i];
+		var leftValue 	= result[leftKey], leftType = typeof leftValue;
+		var rightValue 	= oRight[leftKey], rightType = typeof rightValue;
 
 		//Add numbers
 		if ( leftType === 'number' && 
 			rightType === 'number')
 
 			result[leftKey] = leftValue + rightValue;
+
 		//Replace strings
 		else if ( leftType === 'string' && 
-			rightType === 'string')
+				 rightType === 'string')
 
 			result[leftKey] = rightValue;
 
 		//Left array, right number interp as: push, pop, and inc/dec on the last value.
 		else if ( Array.isArray(leftValue) && 
-		    rightType === 'number')
+		    	  rightType === 'number')
 
 			switch(rightValue){
 				case 0: leftValue.push(0); break;
@@ -36,14 +37,14 @@ function combineKeys(oLeft, oRight, bMutate){
 				case 3: leftValue[leftValue.length-1]--; break;
 			}
 
-		//Left number, right string interp as increment
+		//Left number, right string: replace the number
 		else if ( leftType === 'number' && 
-			rightType === 'string')
+				 rightType === 'string')
 			result[leftKey] = +rightValue;
 
 		//Combine objects into an array
 		else if ( leftType === 'object' && 
-			rightType === 'object')
+				 rightType === 'object')
 
 			result[leftKey].push(rightValue);
 	} //end for
