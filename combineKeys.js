@@ -1,32 +1,61 @@
 function combineKeys(oLeft, oRight, bMutate){
-  'use strict';
-  function clone(obj){
-    return JSON.parse(JSON.stringify(obj));
-  }
+	'use strict';
+	function clone(obj){return JSON.parse(JSON.stringify(obj));}
+
 	if (typeof oRight != 'object' || oRight === null ) return oLeft;
 	if (typeof bMutate !== 'boolean') bMutate = false;
 	var result = bMutate ? oLeft : clone(oLeft);
 
-	var keys = Object.keys(result);
-	for (var i = 0; i < keys.length; i++) {
-		var k = keys[i];
-		var v = result[keys[i]];
-		if (typeof v === 'number' && typeof oRight[k] === 'number')
-			result[k] = v + oRight[k];
-		if (typeof v === 'string' && typeof oRight[k] === 'string')
-			result[k] = oRight[k];
-		if (typeof v === 'object' && typeof oRight[k] === 'object')  // support new children
-			result[k].push(oRight[k]);
-		if (typeof v === 'object' && typeof oRight[k] === 'number') //support simple array commands
-			switch(oRight[k]){
-				case 0: v.push(0); break;
-				case 1: v.pop(); break;
-				case 2: v[v.length-1]++; break;
-				case 3: v[v.length-1]--; break;
+	var leftKeys = Object.keys(result);
+	var rightKeys = Object.keys(oRight);
+
+	for (var i = 0; i < leftKeys.length; i++) {
+		var leftKey = leftKeys[i];
+		var leftValue = result[leftKey], leftType = typeof leftValue;
+		var rightValue = oRight[leftKey], rightType = typeof rightValue;
+
+		//Add numbers
+		if ( leftType === 'number' && 
+			rightType === 'number')
+
+			result[leftKey] = leftValue + rightValue;
+		//Replace strings
+		else if ( leftType === 'string' && 
+			rightType === 'string')
+
+			result[leftKey] = rightValue;
+
+		//Left array, right number interp as: push, pop, and inc/dec on the last value.
+		else if ( Array.isArray(leftValue) && 
+		    rightType === 'number')
+
+			switch(rightValue){
+				case 0: leftValue.push(0); break;
+				case 1: leftValue.pop(); break;
+				case 2: leftValue[leftValue.length-1]++; break;
+				case 3: leftValue[leftValue.length-1]--; break;
 			}
-		if (typeof v === 'number' && typeof oRight[k] === 'string') //support simple commands
-			result[k] = +oRight[k];
-	};
+
+		//Left number, right string interp as increment
+		else if ( leftType === 'number' && 
+			rightType === 'string')
+			result[leftKey] = +rightValue;
+
+		//Combine objects into an array
+		else if ( leftType === 'object' && 
+			rightType === 'object')
+
+			result[leftKey].push(rightValue);
+	} //end for
+
+	//Look through all the right keys that are missing, and just add them.
+	for (var i = 0; i < rightKeys.length; i++) {
+		var rightKey = rightKeys[i];
+		var rightValue = oRight[rightKey];
+		var leftValue = result[rightKey];
+		if ( typeof leftValue === 'undefined')
+			result[rightKey] = rightValue
+	}
 	return result;
 }
 

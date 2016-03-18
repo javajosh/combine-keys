@@ -2,7 +2,7 @@
   "name": "combine-keys",
   "version": "0.1.0",
   "description": "A function that combines the keys of two objects",
-  "main": "test.js",
+  "main": "combineKeys.js",
   "scripts": {
     "test": "node test.js",
     "browser" : "open test.html",

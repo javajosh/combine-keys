@@ -22,3 +22,8 @@ b = combineKeys({a:[0]}, {a:2});
 assert(b.a[0] === 1);
 b = combineKeys({a:[1]}, {a:3});
 assert(b.a[0] === 0);
+
+//Missing keys should be combined
+b = combineKeys({a:1},{b:2});
+assert(b.a === 1);
+assert(b.b === 2);
