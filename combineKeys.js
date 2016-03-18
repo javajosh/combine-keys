@@ -1,62 +1,41 @@
-function combineKeys(oLeft, oRight, bMutate){
-	'use strict';
-	function clone(obj){return JSON.parse(JSON.stringify(obj));}
+//Add source to target, mutating target according to certain rules.
+function combineKeys(source, target, replace, reservedKeys){
+  reservedKeys = (typeof reservedKeys === 'undefined') ? {} : reservedKeys;
+	var result;
+	var sourceType = Array.isArray(source) ? 'array' : typeof source;
+	var targetType = Array.isArray(target) ? 'array' : typeof target;
+	//console.log(sourceType, targetType, source, target === R ? 'R' : target);
 
-	if (typeof oRight != 'object' || oRight === null ) return oLeft;
-	if (typeof bMutate !== 'boolean') bMutate = false;
-	var result = bMutate ? oLeft : clone(oLeft);
+	if (replace || (targetType === 'undefined'))
+										result = source;
+	else if (sourceType === 'string'
+        && targetType === 'string')
+										result = source;
 
-	var leftKeys = Object.keys(result);
-	var rightKeys = Object.keys(oRight);
+	else if (sourceType === 'number'
+	  	  && targetType === 'number')
+										result = source + target;
 
-	for (var i = 0; i < leftKeys.length; i++) {
-		var leftKey 	= leftKeys[i];
-		var leftValue 	= result[leftKey], leftType = typeof leftValue;
-		var rightValue 	= oRight[leftKey], rightType = typeof rightValue;
+	else if (sourceType === 'string'
+	 	    && targetType === 'number')
+										result = +source;
 
-		//Add numbers
-		if ( leftType === 'number' && 
-			rightType === 'number')
-
-			result[leftKey] = leftValue + rightValue;
-
-		//Replace strings
-		else if ( leftType === 'string' && 
-				 rightType === 'string')
-
-			result[leftKey] = rightValue;
-
-		//Left array, right number interp as: push, pop, and inc/dec on the last value.
-		else if ( Array.isArray(leftValue) && 
-		    	  rightType === 'number')
-
-			switch(rightValue){
-				case 0: leftValue.push(0); break;
-				case 1: leftValue.pop(); break;
-				case 2: leftValue[leftValue.length-1]++; break;
-				case 3: leftValue[leftValue.length-1]--; break;
-			}
-
-		//Left number, right string: replace the number
-		else if ( leftType === 'number' && 
-				 rightType === 'string')
-			result[leftKey] = +rightValue;
-
-		//Combine objects into an array
-		else if ( leftType === 'object' && 
-				 rightType === 'object')
-
-			result[leftKey].push(rightValue);
-	} //end for
-
-	//Look through all the right keys that are missing, and just add them.
-	for (var i = 0; i < rightKeys.length; i++) {
-		var rightKey = rightKeys[i];
-		var rightValue = oRight[rightKey];
-		var leftValue = result[rightKey];
-		if ( typeof leftValue === 'undefined')
-			result[rightKey] = rightValue
+	else if (sourceType === 'object'
+	 	    && targetType === 'object'){
+										Object.keys(source).forEach(function(k){
+											if (!reservedKeys[k])
+											  target[k] = combineKeys(source[k], target[k])
+										});
+										result = target;
 	}
+	else if (sourceType === 'array' && targetType === 'array')
+										result = target.concat(source);
+
+	else if (targetType === 'array')
+										{target.push(source); result = target;}
+
+	else throw 'Combination not supported: ' + sourceType + ',' + targetType;
+
 	return result;
 }
 
