@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "node test.js",
-    "browser" : "open index.html",
+    "browser" : "open test.html",
     "lint": "eslint ."
   },
   "repository": {
